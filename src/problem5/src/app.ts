@@ -1,7 +1,8 @@
 import express from "express";
-import sampleRoute from "./routes/sampleRoutes";
-import connectDB from "./databases/db";
 import dotenv from "dotenv"
+import sampleRoute from "./routes/sampleRoutes";
+import routes from "./routes/index"
+import connectDB from "./databases/db";
 
 dotenv.config();
 
@@ -16,8 +17,9 @@ app.use(express.json());
 connectDB()
 
 //Route
-app.use('/api', sampleRoute);
-app.use('/api/users', require("./routes/users"));
+routes(app);
+// app.use('/api', sampleRoute);
+// app.use('/api/users', require("./routes/users"));
 
 app.get("/", (req, res) => {
     res.send("Hello, Express");

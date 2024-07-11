@@ -8,13 +8,7 @@ const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/problem5';
 const connectDB = async () => {
     try {
         await mongoose
-            .connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            } as ConnectOptions)
-            .then(res => {
-                console.log("Connected to Distribution API Database - Initial Connection")
-            });
+            .connect(uri);
         console.log('MongoDB connected');
     }
     catch (error) {
