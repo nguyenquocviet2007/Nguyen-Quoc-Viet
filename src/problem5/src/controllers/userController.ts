@@ -32,13 +32,64 @@ export default {
             }
             else {
                 return res.status(200).json({
+                    info: user,
                     message: "Login Successfully!!"
                 })
             }
         }
         catch (error) {
-            res.status(400).json({
-                error: "Failed to Login"
+            res.status(500).json({
+                message: "Internal Server Error!"
+            })
+        }
+    },
+    UpdateUser: async (req: Request, res: Response) => {
+        try {
+            let {id} = req.params;
+            let infoUpdate = req.body;
+            let user = await User.findOne({_id: id});
+            if (user) {
+                await User.findByIdAndUpdate(
+                    user._id,
+                    infoUpdate
+                );
+                return res.status(200).json({
+                    message: "Update Successfully!"
+                });
+            }
+            else {
+                return res.status(401).json({
+                    message: "Cannot update information"
+                });
+            }
+        }
+        catch (error) {
+            res.status(500).json({
+                message: "Internal Server Error!"
+            })
+        }
+    },
+    DeleteUser: async (req: Request, res: Response) => {
+        try {
+            let {id} = req.params;
+            let user = await User.findOne({_id: id});
+            if (user) {
+                await user.deleteOne({
+                    _id: id
+                });
+                return res.status(200).json({
+                    message: "Delete Successfully!"
+                });
+            }
+            else {
+                return res.status(401).json({
+                    message: "Cannot update information"
+                });
+            }
+        }
+        catch (error) {
+            res.status(500).json({
+                message: "Internal Server Error!"
             })
         }
     }
