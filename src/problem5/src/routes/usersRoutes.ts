@@ -1,11 +1,11 @@
 import express from "express";
-import userController from "../controllers/userController"
+import UserController from "../controllers/userController";
 
 const router = express.Router();
 
-router.post("/register", userController.CreateUser);
-router.post("/login", userController.GetUser);
-router.put("/update/:id", userController.UpdateUser);
-router.delete("/delete/:id", userController.DeleteUser);
+router.post("/register", UserController.CreateUser);
+router.post("/login", UserController.GetUser);
+router.put("/update/:id", UserController.UpdateUser);
+router.delete("/delete/:id", UserController.DeleteUser);
 
 export default router;

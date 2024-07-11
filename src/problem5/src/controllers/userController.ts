@@ -16,6 +16,7 @@ export default {
             })
         }
     },
+
     GetUser: async (req: Request, res: Response) => {
         try{
             let {email, password} = req.body;
@@ -43,6 +44,7 @@ export default {
             })
         }
     },
+
     UpdateUser: async (req: Request, res: Response) => {
         try {
             let {id} = req.params;
@@ -69,6 +71,7 @@ export default {
             })
         }
     },
+    
     DeleteUser: async (req: Request, res: Response) => {
         try {
             let {id} = req.params;
