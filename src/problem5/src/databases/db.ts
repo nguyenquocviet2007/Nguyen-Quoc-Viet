@@ -1,20 +1,50 @@
+'use strict'
 import mongoose, {ConnectOptions} from "mongoose";
 import dotenv from "dotenv"
+import config from "../configs/config.mongodb"
+const {host, port, name} = config.db
+
 
 dotenv.config()
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/problem5';
-
-
-const connectDB = async () => {
-    try {
-        await mongoose
-            .connect(uri);
-        console.log('MongoDB connected');
+const uri = `mongodb://${host}:${port}/${name}`;
+class Database {
+    static instance: Database;
+    constructor() {
+        this.connect();
     }
-    catch (error) {
-        console.error('MongoDB connection error: ', error);
-        process.exit(1);
+
+    connect(type = "mongodb") {
+        mongoose.connect(uri)
+            .then( _ => {
+                console.log("Connect MongoDB Successfully!");
+            })
+            .catch(error => console.log(error));
+    }
+
+    static getInstance() {
+        if(!Database.instance) {
+            Database.instance = new Database();
+        }
+        return Database.instance;
     }
 }
 
-export default connectDB;
+const instanceMongoDb = Database.getInstance();
+
+module.exports = instanceMongoDb;
+
+
+
+// const connectDB = async () => {
+//     try {
+//         await mongoose
+//             .connect(uri);
+//         console.log('MongoDB connected');
+//     }
+//     catch (error) {
+//         console.error('MongoDB connection error: ', error);
+//         process.exit(1);
+//     }
+// }
+
+// export default connectDB;

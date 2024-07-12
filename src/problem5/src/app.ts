@@ -2,20 +2,18 @@ import express from "express";
 import dotenv from "dotenv"
 import sampleRoute from "./routes/sampleRoutes";
 import routes from "./routes/index"
-import connectDB from "./databases/db";
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT_DEV || 3000;
 
 //Middleware for JSON parsing
 app.use(express.json());
 
 
 //Database
-connectDB()
-
+import "./databases/db"
 //Route
 routes(app);
 // app.use('/api', sampleRoute);
