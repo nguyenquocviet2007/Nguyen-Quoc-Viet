@@ -16,8 +16,6 @@ app.use(express.json());
 import "./databases/db"
 //Route
 routes(app);
-// app.use('/api', sampleRoute);
-// app.use('/api/users', require("./routes/users"));
 
 app.get("/", (req, res) => {
     res.send("Hello, Express");
