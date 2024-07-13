@@ -1,11 +1,11 @@
 import { Express } from "express";
 import ConstantRoute from "../constants/constantRoute"
 // import SampleRoute from "./sampleRoutes"
-// import UserRoute from "./usersRoutes"
+import UserRoute from "./userRoutes"
  
 function routes(app: Express): void {
     // app.use(ConstantRoute.SAMPE, SampleRoute)
-    // app.use(ConstantRoute.USER, UserRoute)
+    app.use(ConstantRoute.USER, UserRoute)
 }
 
 export default routes;

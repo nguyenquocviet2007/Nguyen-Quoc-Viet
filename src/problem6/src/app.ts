@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv"
 import routes from "./routes/index"
+import { setupWebSocket } from "./services/webSocketService";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
     res.send("Hello, Express");
 })
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 })
+setupWebSocket(server);
