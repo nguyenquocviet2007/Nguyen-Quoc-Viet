@@ -6,12 +6,12 @@ export default {
         try {
             const newUser = new User(req.body);
             const user = await newUser.save();
-            res.status(201).json({
+            return res.status(201).json({
                 user: user
             })
         }
         catch (error) {
-            res.status(400).json({
+            return res.status(400).json({
                 error: "Failed to create user"
             })
         }
@@ -39,7 +39,20 @@ export default {
             }
         }
         catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
+                message: "Internal Server Error!"
+            })
+        }
+    },
+    
+    GetAllUser: async (req: Request, res: Response) => {
+        try {
+            let allUser = await User.find();
+            return res.status(200).json({
+                users: allUser
+            })
+        } catch (error) {
+            return res.status(500).json({
                 message: "Internal Server Error!"
             })
         }
@@ -66,7 +79,7 @@ export default {
             }
         }
         catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 message: "Internal Server Error!"
             })
         }
@@ -91,7 +104,7 @@ export default {
             }
         }
         catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 message: "Internal Server Error!"
             })
         }
