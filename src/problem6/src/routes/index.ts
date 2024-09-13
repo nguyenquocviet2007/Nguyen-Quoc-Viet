@@ -1,11 +1,10 @@
-import { Express } from "express";
-import ConstantRoute from "../constants/constantRoute"
-// import SampleRoute from "./sampleRoutes"
-import UserRoute from "./userRoutes"
- 
-function routes(app: Express): void {
-    // app.use(ConstantRoute.SAMPE, SampleRoute)
-    app.use(ConstantRoute.USER, UserRoute)
-}
+import express from 'express';
+import weatherRoutes from './weather';
+import subscriptionRoutes from './subscription' 
 
-export default routes;
+const router = express.Router();
+
+router.use('/api/weather', weatherRoutes);
+router.use('/api/subscription', subscriptionRoutes);
+
+export default router;
